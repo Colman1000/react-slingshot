@@ -34,7 +34,7 @@ jobs:
           name: Restore NPM Package Cache
           keys:
             - node_modules
-      - run: npm run test
+      - run: npm audit
 
 workflows:
   build_app:
