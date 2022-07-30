@@ -9,7 +9,7 @@ jobs:
     <<: *install_base_img
     steps:
       - checkout
-      - run: npm i
+      - run: npm install
       - save_cache:
           key: node_modules
           paths:
