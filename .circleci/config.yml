@@ -15,7 +15,6 @@ jobs:
           paths:
             - ./node_modules
       - run: npm run lint
-      - run: npm run build
 
   test:
     <<: *install_base_img
