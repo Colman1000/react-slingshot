@@ -2,7 +2,7 @@ version: 2.1
 
 install_base_img: &install_base_img
   docker:
-    - image: cimg/base:2020.01
+    - image: cimg/node:12.16
 
 jobs:
   build:
