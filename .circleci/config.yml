@@ -1,0 +1,45 @@
+version: 2.1
+
+install_base_img: &install_base_img
+  docker:
+    - image: cimg/base:2020.01
+
+jobs:
+  build:
+    <<: *install_base_img
+    steps:
+      - checkout
+      - run: npm i
+      - save_cache:
+          key: node_modules
+          paths:
+            - ./node_modules
+      - run: npm run lint
+      - run: npm run build
+
+  test:
+    <<: *install_base_img
+    steps:
+      - restore_cache:
+          name: Restore NPM Package Cache
+          keys:
+            - node_modules
+      - run: npm run test
+
+  analyze:
+    <<: *install_base_img
+    steps:
+      - restore_cache:
+          name: Restore NPM Package Cache
+          keys:
+            - node_modules
+      - run: npm run test
+
+workflows:
+  build_app:
+    jobs:
+      - build
+      - test:
+          requires: [ build ]
+      - analyze:
+          requires: [ test ]
