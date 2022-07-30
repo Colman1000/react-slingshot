@@ -19,6 +19,7 @@ jobs:
   test:
     <<: *install_base_img
     steps:
+      - checkout
       - restore_cache:
           name: Restore NPM Package Cache
           keys:
@@ -28,6 +29,7 @@ jobs:
   analyze:
     <<: *install_base_img
     steps:
+      - checkout
       - restore_cache:
           name: Restore NPM Package Cache
           keys:
